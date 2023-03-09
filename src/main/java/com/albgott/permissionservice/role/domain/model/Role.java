@@ -41,15 +41,15 @@ public class Role {
     public void addPermissions(List<Permission> permissions){
         if(permissions == null) return;
         for(Permission permission: permissions){
-            if(permission == null || permission.isAdministrative()) continue;
-            this.permissions.add(permission);
+            addPermission(permission);
         }
     }
 
     public void removePermissions(List<Permission> permissions){
         if(permissions == null) return;
         for(Permission permission: permissions){
-            addPermission(permission);
+            if(permission == null) continue;
+            this.permissions.remove(permission);
         }
     }
 
@@ -102,6 +102,11 @@ public class Role {
 
     public void addPermission(Permission permission){
         if(permission == null) return ;
-        this.permissions.add(permission);
+        if(this.businessId == null && permission.isAdministrative()) {
+            this.permissions.add(permission);
+        }
+        if(this.businessId != null && !permission.isAdministrative()) {
+            this.permissions.add(permission);
+        }
     }
 }
