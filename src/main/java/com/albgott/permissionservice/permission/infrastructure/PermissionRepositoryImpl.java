@@ -6,6 +6,7 @@ import com.albgott.permissionservice.permission.domain.repository.PermissionRepo
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PermissionRepositoryImpl implements PermissionRepository {
@@ -23,5 +24,10 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     @Override
     public List<Permission> findDefaultOwnerPermissions() {
         return repository.findByOwnerDefaultTrue();
+    }
+
+    @Override
+    public Optional<Permission> findByName(String name) {
+        return repository.findByNameIgnoreCase(name);
     }
 }

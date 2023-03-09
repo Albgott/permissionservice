@@ -48,4 +48,8 @@ public class Permission {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public boolean isAdministrative(){
+        return type.isAdministrative();
+    }
 }
