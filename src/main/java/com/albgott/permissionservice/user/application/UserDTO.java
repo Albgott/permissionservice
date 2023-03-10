@@ -1,10 +1,12 @@
-package com.albgott.permissionservice.user.domain.model;
+package com.albgott.permissionservice.user.application;
 
 import com.albgott.permissionservice.permission.application.PermissionDTO;
 import com.albgott.permissionservice.role.application.RoleDTO;
+import com.albgott.permissionservice.user.domain.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,13 +15,13 @@ import java.util.stream.Collectors;
 public class UserDTO {
     private String id;
     private String businessId;
-    private Set<RoleDTO> roles;
-    private Set<PermissionDTO> permissions;
+    private List<String> roles_names;
+    private List<String> permissions_names;
 
     public UserDTO(User user) {
         this.id = user.id().toString();
         this.businessId = user.businessId().toString();
-        this.roles = user.roles().stream().map(RoleDTO::new).collect(Collectors.toSet());
-        this.permissions = user.permissions().stream().map(PermissionDTO::new).collect(Collectors.toSet());
+        this.roles_names = user.rolesNames();
+        this.permissions_names = user.permissionsNames();
     }
 }

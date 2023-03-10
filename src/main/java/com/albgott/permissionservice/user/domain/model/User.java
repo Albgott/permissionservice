@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.NonNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -55,6 +56,14 @@ public class User {
 
     public HashSet<Role> roles() {
         return roles;
+    }
+
+    public List<String> rolesNames() {
+        return roles.stream().map(Role::name).toList();
+    }
+
+    public List<String> permissionsNames() {
+        return permissions.stream().map(Permission::name).toList();
     }
 
     @Override
